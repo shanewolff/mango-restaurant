@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(value = "/inventory")
 public class InventoryController {
