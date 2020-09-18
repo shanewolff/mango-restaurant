@@ -1,12 +1,12 @@
 package com.mango.restaurant.exception;
 
-public class DBException extends APIException {
+public class DBException extends RuntimeException {
 
     public DBException() {
-        super("DBException", "A database related error has been occurred.");
+        super("A database related error has been occurred.");
     }
 
     public DBException(String description) {
-        super("DBException", description);
+        super(description);
     }
 }
