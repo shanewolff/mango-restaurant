@@ -4,6 +4,7 @@ import com.mango.restaurant.model.Supplier;
 import com.mango.restaurant.request.ProductInfo;
 import com.mango.restaurant.request.SupplierInfo;
 import com.mango.restaurant.response.ProductInfoResponse;
+import com.mango.restaurant.response.TotalStockLevel;
 import com.mango.restaurant.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -77,5 +78,9 @@ public class InventoryController {
         return inventoryService.deleteProductById(id);
     }
 
+    @GetMapping("/stock-level")
+    public TotalStockLevel getTotalStockLevel() {
+        return inventoryService.getTotalStockLevel();
+    }
 
 }

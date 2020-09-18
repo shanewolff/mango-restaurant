@@ -9,6 +9,7 @@ import com.mango.restaurant.repository.SupplierRepository;
 import com.mango.restaurant.request.ProductInfo;
 import com.mango.restaurant.request.SupplierInfo;
 import com.mango.restaurant.response.ProductInfoResponse;
+import com.mango.restaurant.response.TotalStockLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -144,5 +145,10 @@ public class InventoryService {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         productRepository.delete(product);
         return String.format("Product of id %d has been successfully deleted", id);
+    }
+
+    public TotalStockLevel getTotalStockLevel() {
+        Float value = productRepository.getTotalStockLevel();
+        return new TotalStockLevel(value);
     }
 }

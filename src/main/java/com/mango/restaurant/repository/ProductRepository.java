@@ -15,4 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " and " +
             "upper(product.name) like concat('%', upper(:name), '%')")
     List<Product> searchProduct(@Param("category") String category, @Param("name") String name);
+
+    @Query("select sum(product.stockLevel) from Product product")
+    Float getTotalStockLevel();
 }
