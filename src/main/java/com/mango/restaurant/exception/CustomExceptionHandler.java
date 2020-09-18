@@ -11,14 +11,21 @@ public class CustomExceptionHandler {
     @ResponseBody
     @ExceptionHandler(SupplierNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String handleSuplierNotFound(SupplierNotFoundException ex) {
-        return ex.getMessage();
+    APIException handleSupplierNotFound(SupplierNotFoundException exception) {
+        return exception;
     }
 
     @ResponseBody
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String handleProductNotFound(ProductNotFoundException ex) {
-        return ex.getMessage();
+    APIException handleProductNotFound(ProductNotFoundException exception) {
+        return exception;
+    }
+
+    @ResponseBody
+    @ExceptionHandler(DBException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    APIException handleDBException(DBException exception) {
+        return exception;
     }
 }

@@ -1,0 +1,21 @@
+package com.mango.restaurant.exception;
+
+public class APIException extends RuntimeException {
+    final String exception;
+    final String message;
+
+    public APIException(String exception, String message) {
+        super(message);
+        this.exception = exception;
+        this.message = message;
+    }
+
+    public String getException() {
+        return exception;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+}

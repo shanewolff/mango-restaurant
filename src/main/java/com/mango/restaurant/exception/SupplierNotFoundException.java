@@ -1,7 +1,7 @@
 package com.mango.restaurant.exception;
 
-public class SupplierNotFoundException extends RuntimeException {
+public class SupplierNotFoundException extends APIException {
     public SupplierNotFoundException(Integer id) {
-        super(String.format("No supplier found with id %d", id));
+        super("SupplierNotFoundException", String.format("No supplier found with id %d", id));
     }
 }
