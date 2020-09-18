@@ -7,6 +7,7 @@ import com.mango.restaurant.response.ProductInfoResponse;
 import com.mango.restaurant.response.TotalStockLevel;
 import com.mango.restaurant.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ public class InventoryController {
         return inventoryService.updateSupplierById(id, updatedSupplier);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/supplier")
     public String addNewSupplier(@Valid @RequestBody SupplierInfo newSupplier) {
         return inventoryService.addNewSupplier(newSupplier);
@@ -68,6 +70,7 @@ public class InventoryController {
         return inventoryService.updateProductById(id, updatedProductInfo);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/product")
     public String addNewProduct(@Valid @RequestBody ProductInfo newProduct) {
         return inventoryService.addNewProduct(newProduct);

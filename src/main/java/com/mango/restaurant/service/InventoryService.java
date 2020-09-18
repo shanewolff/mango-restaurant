@@ -1,5 +1,6 @@
 package com.mango.restaurant.service;
 
+import com.mango.restaurant.exception.DBException;
 import com.mango.restaurant.exception.ProductNotFoundException;
 import com.mango.restaurant.exception.SupplierNotFoundException;
 import com.mango.restaurant.model.Product;
@@ -40,7 +41,11 @@ public class InventoryService {
         supplier.setName(updatedSupplier.getName());
         supplier.setEmail(updatedSupplier.getEmail());
         supplier.setContact(updatedSupplier.getContact());
-        supplierRepository.save(supplier);
+        try {
+            supplierRepository.save(supplier);
+        } catch (RuntimeException exception) {
+            throw new DBException("Supplier update failed due to a database error.");
+        }
         return String.format("The supplier of id %d has been updated successfully.", id);
     }
 
@@ -50,14 +55,23 @@ public class InventoryService {
         supplier.setName(newSupplier.getName());
         supplier.setEmail(newSupplier.getEmail());
         supplier.setContact(newSupplier.getContact());
-        supplierRepository.save(supplier);
+        try {
+            supplierRepository.save(supplier);
+        } catch (RuntimeException exception) {
+            throw new DBException("Supplier creation failed due to a database error.");
+        }
+
         return "New supplier saved successfully";
     }
 
     public String deleteSupplierById(Integer id) {
         Supplier supplier =
                 supplierRepository.findById(id).orElseThrow(() -> new SupplierNotFoundException(id));
-        supplierRepository.delete(supplier);
+        try {
+            supplierRepository.delete(supplier);
+        } catch (RuntimeException exception) {
+            throw new DBException("Supplier deletion failed due to a database error.");
+        }
         return String.format("Supplier of id %d has been successfully deleted", id);
     }
 
@@ -122,7 +136,11 @@ public class InventoryService {
         product.setQuantity(updatedProductInfo.getQuantity());
         product.setStockLevel(updatedProductInfo.getStockLevel());
         product.setSupplier(supplier);
-        productRepository.save(product);
+        try {
+            productRepository.save(product);
+        } catch (RuntimeException exception) {
+            throw new DBException("Product update failed due to a database error.");
+        }
         return String.format("The product of id %d has been updated successfully.", id);
     }
 
@@ -137,13 +155,21 @@ public class InventoryService {
         product.setQuantity(newProduct.getQuantity());
         product.setStockLevel(newProduct.getStockLevel());
         product.setSupplier(supplier);
-        productRepository.save(product);
+        try {
+            productRepository.save(product);
+        } catch (RuntimeException exception) {
+            throw new DBException("Product creation failed due to a database error.");
+        }
         return "New product saved successfully";
     }
 
     public String deleteProductById(Integer id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
-        productRepository.delete(product);
+        try {
+            productRepository.delete(product);
+        } catch (RuntimeException exception) {
+            throw new DBException("Product deletion failed due to a database error.");
+        }
         return String.format("Product of id %d has been successfully deleted", id);
     }
 
