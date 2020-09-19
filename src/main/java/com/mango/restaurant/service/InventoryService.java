@@ -115,22 +115,6 @@ public class InventoryService {
                 product.getSupplier().getName());
     }
 
-//    public List<ProductInfoResponse> searchProduct(String category, String name) {
-//        List<Product> productList = productRepository.searchProduct(category, name);
-//        List<ProductInfoResponse> productInfoResponseList = new ArrayList<>();
-//        productList.forEach(product -> productInfoResponseList.add(new ProductInfoResponse(
-//                product.getId(),
-//                product.getCode(),
-//                product.getName(),
-//                product.getCategory(),
-//                product.getDescription(),
-//                product.getQuantity(),
-//                product.getStockLevel(),
-//                product.getSupplier().getId(),
-//                product.getSupplier().getName())));
-//        return productInfoResponseList;
-//    }
-
     public List<ProductInfoResponse> searchProduct(String name, String category, String supplier) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ProductInfoResponse> productInfoResponseCriteriaQuery = criteriaBuilder.createQuery(ProductInfoResponse.class);
