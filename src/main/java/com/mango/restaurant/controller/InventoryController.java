@@ -59,9 +59,10 @@ public class InventoryController {
     }
 
     @GetMapping("/product/search")
-    public List<ProductInfoResponse> searchProducts(@RequestParam String category,
-                                                    @RequestParam String name) {
-        return inventoryService.searchProduct(category, name);
+    public List<ProductInfoResponse> searchProducts(@RequestParam(required = false) String name,
+                                                    @RequestParam(required = false) String category,
+                                                    @RequestParam(required = false) String supplier) {
+        return inventoryService.searchProduct(name, category, supplier);
     }
 
     @PatchMapping("/product/{id}")
